@@ -3,10 +3,20 @@ package BankAccounts;
 import java.util.Objects;
 
 public class Account {
-    int account;
+    private int account;
+    private String clientName;
 
-    public Account(int account) {
+    public Account(int account, String clientName) {
         this.account = account;
+        this.clientName = clientName;
+    }
+
+    public int getAccount() {
+        return account;
+    }
+
+    public String getClientName() {
+        return clientName;
     }
 
     @Override
