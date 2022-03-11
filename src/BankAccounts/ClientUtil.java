@@ -35,7 +35,6 @@ public class ClientUtil {
             StringBuilder card = new StringBuilder("RU");
             for (int j = 0; j < 24; j++) {
                 int n = rm.nextInt(10);
-//                card = card + Integer.toString(n);
                 card.append(n);
             }
             Account fakerAccount = new Account(card.toString(), client);
