@@ -3,20 +3,36 @@ package BankAccounts;
 import java.util.Objects;
 
 public class Account {
-    private int account;
-    private String clientName;
+    private String account;
+    private Client client;
 
-    public Account(int account, String clientName) {
+    public Account(String account, Client client) {
         this.account = account;
-        this.clientName = clientName;
+        this.client = client;
     }
 
-    public int getAccount() {
+    public Account() {
+    }
+
+    public String getAccount() {
         return account;
     }
 
-    public String getClientName() {
-        return clientName;
+    public Client getClient() {
+        return client;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    @Override
+    public String toString() {
+        return account;
     }
 
     @Override
@@ -24,7 +40,7 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account1 = (Account) o;
-        return account == account1.account;
+        return account.equals(account1.account);
     }
 
     @Override
