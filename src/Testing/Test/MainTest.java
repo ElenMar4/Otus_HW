@@ -1,6 +1,8 @@
 package Testing.Test;
 
-import Testing.App.Game.*;
+import Testing.App.Game.DiceImpl;
+import Testing.App.Game.GameWinnerConsolePrinter;
+import Testing.App.Game.Player;
 
 public class MainTest {
 
@@ -9,13 +11,13 @@ public class MainTest {
 
 //         Кости принимают значения от 0 до 6?"
         diceImplTest();
-//
+
 //        Сравнение значений костей игроков
         playGameTest1();
-//
+
 //        Если значения костей одинаковы
         playGameTest2();
-//
+
 //        Если победитель = null
         gameWinnerConsolePrinterTest();
     }
