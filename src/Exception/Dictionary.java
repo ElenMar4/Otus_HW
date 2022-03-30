@@ -45,7 +45,7 @@ public class Dictionary {
     //запись в файл слов, которых нет в словаре
     public void newWords(String string) throws IOException {
         String text = string +"\n";
-        try (FileOutputStream fos = new FileOutputStream("/home/alex/JB_2021_29/src/Exception/NewWords.txt", true)) {
+        try (FileOutputStream fos = new FileOutputStream("NewWords.txt", true)) {
             // перевод строки в байты
             byte[] buffer = text.getBytes();
             fos.write(buffer, 0, buffer.length);
@@ -59,7 +59,7 @@ public class Dictionary {
     public void printNewWords() {
         FileReader reader = null;
         try {
-            reader = new FileReader("/home/alex/JB_2021_29/src/Exception/NewWords.txt");
+            reader = new FileReader("NewWords.txt");
             char[] buf = new char[256];
             int count;
             while ((count = reader.read(buf)) > 0) {
