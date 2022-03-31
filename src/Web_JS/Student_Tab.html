@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Привет студент</title>
+    <style>
+        .field {
+                clear:both;
+                text-align:right;
+        }
+        fieldset{
+                padding: 20px;
+                width: 800px;
+                border: solid 2px steelblue;
+        }
+        button:hover {
+                background-color: #555555;
+                color: white;
+        }
+        div     {
+                margin-bottom: 20px;
+                padding: 10px
+                float left
+        }
+        button  {
+                font-size: 16pt;
+                padding: 5px;
+                float: left;
+                border: 1px solid grey;
+        }
+        label  {
+                font-size: 16pt;
+                float:left;
+        }
+        select {
+                border: solid 2px steelblue;
+                background: none;
+                width: 425px;
+                font-size: 16pt;
+                padding: 10px
+        }
+        input {
+                border: solid 2px steelblue;
+                width: 400px;
+                font-size: 16pt;
+                padding: 10px
+        }
+        table {
+                width: 100%; /* Ширина таблицы в процентах */
+                font-size: 18pt;
+        }
+        .col1 {
+                width: 200px; /* Ширина ячейки */
+        }
+        .col2 {
+                width: 100px; /* Ширина ячейки */
+        }
+        #studentTab {
+                border: 1px solid steelblue;
+                border-collapse: collapse;
+         }
+        #studentTab try td {
+                border: 2px solid steelblue;
+                padding: 10px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        function addStudent(){
+            
+            const studentTab = document.getElementById("studentTab").getElementsByTagName("TBODY")[0]
+            const studentName = document.getElementById("nameNewStudent").value
+            const studentGender = document.getElementById("genderNewStudent").value 
+            const studentDate = document.getElementById("dateNewStudent").value
+            const studentAge = calculateAge(studentDate)
+            
+            const dateNewFormat = studentDate.split('-').reverse().join('.')
+
+            var row = document.createElement("TR")
+            
+            var td1 = document.createElement("TD")
+            var td2 = document.createElement("TD")
+            var td3 = document.createElement("TD")
+            var td4 = document.createElement("TD")
+            
+            td1.appendChild(document.createTextNode(studentName))
+            td2.appendChild(document.createTextNode(studentGender))
+            td3.appendChild(document.createTextNode(dateNewFormat))
+            td4.appendChild(document.createTextNode(studentAge))
+
+            row.appendChild(td1)
+            row.appendChild(td2)
+            row.appendChild(td3)
+            row.appendChild(td4)
+
+            studentTab.appendChild(row)
+           
+            let averageAge = Math.trunc(sumAge(studentTab)/studentTab.rows.length)
+
+            const averageAgeTable = document.getElementById("averageAgeCell")
+            averageAgeTable.innerHTML=averageAge;
+        }
+
+        function sumAge(studentTab){
+            let summ = 0
+            for (var i = 0; i < studentTab.rows.length; i++) {
+                summ+= parseInt(studentTab.rows[i].cells[3].innerHTML)
+            }
+            return summ
+        }
+       
+        function calculateAge(studentDate) {
+        birthDate = new Date(studentDate)
+        var now = new Date()
+        age = now.getFullYear() - birthDate.getFullYear()
+        return age;
+        }
+       
+    </script>
+    </head>
+    <body>
+        <p>
+            <h2>Форма добавления информации о студенте</h2>
+
+        <form>
+            <fieldset>
+
+                <div class="field">
+                    <label>Имя студента:</label>
+                    <input id = "nameNewStudent" type="text" placeholder="Вася"/>
+                </div>
+
+                <div class="field">
+                    <label>Дата рождения:</label>
+                    <input id = "dateNewStudent" type="date"/>
+                </div>
+
+                <div class="field">
+                    <label>Пол:</label>
+                    <select id = "genderNewStudent">
+                        <option value="женщина">женщина</option>
+                        <option value="мужчина" selected>мужчина</option>
+                    </select>
+                </div>
+                <p>
+                    <button type = "button" onclick = "addStudent()">Добавить</button>
+                </p>
+            </fieldset>
+        </form>
+        <p>
+            <h2>Таблица студентов</h2>
+
+        <p>
+            <table id = "studentTab" cellpadding = "10" border = "1">
+                <thead>
+                    <tr>
+                        <td class="col1" id = "nameStudentTab">Имя студента</td>
+                        <td class="col2" id = "genderStudentTab">Пол</td>
+                        <td class="col2" id = "dateStudentTab">Дата рождения</td>
+                        <td class="col2" id = "ageStudentTab">Возраст</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Иван Ограномович Штейн</td>
+                        <td>мужчина</td>
+                        <td>12.06.1976</td>
+                        <td>46</td>
+                    </tr>
+
+                    <tr>
+                        <td>Гертруда Анатольевна Иванова</td>
+                        <td>женщина</td>
+                        <td>01.01.1987</td>
+                        <td>34</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Воланд Игоревич Муха</td>
+                        <td>мужчина</td>
+                        <td>27.04.1974</td>
+                        <td>47</td>
+                    </tr>
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="4"> </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">Средний возраст студентов</td><td id = "averageAgeCell">42</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+    </body>
+</html>
