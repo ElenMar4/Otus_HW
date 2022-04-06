@@ -14,7 +14,7 @@ ls
 docker run --name habr-pg-13.1 -e POSTGRES_PASSWORD=pgpwd4habr -d postgres:13.1 
 
 
-
+Docker
 
 установите докер для вашей операционной системы. дальнейшие действия надо выполнять в консоли:
 выполните docker run hello-world
