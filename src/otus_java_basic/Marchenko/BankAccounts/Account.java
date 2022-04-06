@@ -1,14 +1,11 @@
 package otus_java_basic.Marchenko.BankAccounts;
-
 import java.util.Objects;
 
 public class Account {
     private String account;
-    private Client client;
 
-    public Account(String account, Client client) {
+    public Account(String account) {
         this.account = account;
-        this.client = client;
     }
 
     public Account() {
@@ -18,21 +15,8 @@ public class Account {
         return account;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
     public void setAccount(String account) {
         this.account = account;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    @Override
-    public String toString() {
-        return account;
     }
 
     @Override
@@ -43,8 +27,7 @@ public class Account {
         return account.equals(account1.account);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(account);
+    public void printAccount() {
+        System.out.println("Счет: " + getAccount());
     }
 }
