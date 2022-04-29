@@ -1,71 +1,72 @@
 package otus_java_basic.Marchenko.ProjectWork;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
-public class ConvertUserEnter {
+public class ConvertUserEnter implements ConvertUserEnterInterface {
 
-    public String getNumber (int intValue){
+    private final Map<Integer, String[]> matrixNumericFirstExponent;
 
-        Map<Integer, String[]> matrixNumeric = new HashMap<>();
-        matrixNumeric.put(0, new String[]{"", "", "", ""});
-        matrixNumeric.put(1, new String[]{"один", "", "сто", "одна тысяча"});
-        matrixNumeric.put(2, new String[]{"два", "двадцать", "двести", "две тысячи"});
-        matrixNumeric.put(3, new String[]{"три", "тридцать", "триста", "три тысячи"});
-        matrixNumeric.put(4, new String[]{"четыре", "сорок", "четыреста", "четыре тысячи"});
-        matrixNumeric.put(5, new String[]{"пять", "пятьдесят", "пятьсот", "пять тысяч"});
-        matrixNumeric.put(6, new String[]{"шесть", "шестьдесят", "шестьсот", "шесть тысяч"});
-        matrixNumeric.put(7, new String[]{"семь", "семьдесят", "семьсот", "семь тысяч"});
-        matrixNumeric.put(8, new String[]{"восемь", "восемьдесят", "восемьсот", "восемь тысяч"});
-        matrixNumeric.put(9, new String[]{"девять", "девяносто", "девятьсот", "девять тысяч"});
+    public ConvertUserEnter() {
+        matrixNumericFirstExponent = Map.ofEntries(Map.entry(0, new String[]{"", "десять ", "", ""}),
+                Map.entry(1, new String[]{"один ", "одиннадцать ", "", "сто "}),
+                Map.entry(2, new String[]{"два ", "двенадцать ", "двадцать ", "двести "}),
+                Map.entry(3, new String[]{"три ", "тринадцать ", "тридцать ", "триста "}),
+                Map.entry(4, new String[]{"четыре ", "четырнадцать ", "сорок ", "четыреста "}),
+                Map.entry(5, new String[]{"пять ", "пятнадцать ", "пятьдесят ", "пятьсот "}),
+                Map.entry(6, new String[]{"шесть ", "шестнадцать ", "шестьдесят ", "шестьсот "}),
+                Map.entry(7, new String[]{"семь ", "семнадцать ", "семьдесят ", "семьсот "}),
+                Map.entry(8, new String[]{"восемь ", "восемнадцать ", "восемьдесят ", "восемьсот "}),
+                Map.entry(9, new String[]{"девять ", "девятнадцать ", "девяносто ", "девятьсот "}));
+    }
 
-        Map<Integer, String> matrixNumericEleven = new HashMap<>();
-        matrixNumericEleven.put(0, "десять");
-        matrixNumericEleven.put(1, "одиннадцать");
-        matrixNumericEleven.put(2, "двенадцать");
-        matrixNumericEleven.put(3, "тринадцать");
-        matrixNumericEleven.put(4, "четырнадцать");
-        matrixNumericEleven.put(5, "пятнадцать");
-        matrixNumericEleven.put(6, "шестнадцать");
-        matrixNumericEleven.put(7, "семнадцать");
-        matrixNumericEleven.put(8, "восемнадцать");
-        matrixNumericEleven.put(9, "девятнадцать");
+    public String getNumberAsString(int intValue) {
 
-        String string = String.valueOf(intValue);
-        char[] array = string.toCharArray();
-        int temp = array.length;
-        StringBuilder outString = new StringBuilder();
-        for (int k = 0; k < array.length; k++){
-            int key = array[k]-'0';
-            if ((temp == 2) & (key == 1)){
-                key = array[k + 1]-'0';
-                outString.append(matrixNumericEleven.get(key)).append(" ");
-                break;
-            } else {
-                outString.append(matrixNumeric.get(key)[temp - 1]).append(" ");
-                temp--;
+        Stack<Integer> exponent = new Stack<>();
+        int tempNumber = intValue;
+        while (tempNumber != 0){
+            exponent.push(tempNumber % 1000);
+            tempNumber = tempNumber / 1000;
+        }
+        String strFinal = "";
+        switch (exponent.size()){
+            case 1 -> strFinal = numberToOneExponent(exponent.pop());
+            case 2 -> strFinal = numberToTwoExponent(exponent.pop());
+            case 3 -> strFinal = numberToThreeExponent(exponent.pop());
+        }
+        return strFinal;
+    }
+
+    public String numberToOneExponent(int numberOneExponent){
+        StringBuilder stringOut = new StringBuilder();
+        Stack<Integer> digit = new Stack<>();
+        int temp = numberOneExponent;
+        while (temp != 0) {
+            digit.push(temp % 10);
+            temp = temp / 10;
+        }
+        while (digit.size() != 0) {
+            switch (digit.size()) {
+                case 1 -> stringOut.append(matrixNumericFirstExponent.get(digit.pop())[0]);
+                case 2 -> {
+                    int dozens = digit.pop();
+                    if (dozens == 1) {
+                        stringOut.append(matrixNumericFirstExponent.get(digit.pop())[1]);
+                    } else {
+                        stringOut.append(matrixNumericFirstExponent.get(dozens)[2]);
+                    }
+                }
+                case 3 -> stringOut.append(matrixNumericFirstExponent.get(digit.pop())[3]);
             }
         }
-        return outString.toString();
+        return stringOut.toString();
     }
 
-    public String getString (int intValue, String userSelectCurrency){
-        Currency currency = new Currency();
-        String[] currencyTemp = currency.getCurrency(userSelectCurrency);
-        return ( switch (intValue % 10) {
-            case 1 -> currencyTemp[0];
-            case 2, 3, 4 -> currencyTemp[1];
-            case 5, 6, 7, 8, 9, 0 -> currencyTemp[2];
-            default -> throw new IllegalStateException("Unexpected value: " + intValue % 10);
-        });
-    }
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public String numberToTwoExponent(int temp){
+        return "Здесь будет код для чисел от 1000 до 999 999";
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public String numberToThreeExponent(int temp){
+        return "Здесь будет код для чисел от 1 000 000 до 999 999 999";
     }
 }
