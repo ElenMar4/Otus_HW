@@ -3,25 +3,25 @@ package otus_java_basic.Marchenko.ProjectWork;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WorkWithCurrency implements WorkWithCurrencyInterface {
+public class CurrencyCompilerForRegionOne implements CompilerOfCurrency {
 
     private final Map<String, String[]> currency = new HashMap<>();
 
-    public WorkWithCurrency() {
+    public CurrencyCompilerForRegionOne() {
         currency.put("rub", new String[]{"рубль", "рубля", "рублей"});
         currency.put("usd", new String[]{"доллар", "доллара", "долларов"});
         currency.put("eur", new String[]{"евро", "евро", "евро"});
     }
 
-    public String getListCurrency() {
-        StringBuilder listCurrency = new StringBuilder();
+    public String getListTheCurrencies() {
+        StringBuilder listCurrencies = new StringBuilder();
         for (String temp : currency.keySet()) {
-            listCurrency.append(temp).append(" / ");
+            listCurrencies.append(temp).append(" / ");
         }
-        return listCurrency.toString();
+        return listCurrencies.toString();
     }
 
-    public String getUserCurrency(int intValue, String userSelectCurrency) {
+    public String getCurrencyBySourceData(int intValue, String userSelectCurrency) {
         String[] currencyTemp = currency.get(userSelectCurrency);
         int value = intValue/10;
         if (value % 10 == 1){

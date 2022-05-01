@@ -2,7 +2,7 @@ package otus_java_basic.Marchenko.ProjectWork;
 
 import java.util.Scanner;
 
-public class WorkWithConsole implements WorkWithConsoleInterface {
+public class ConsoleUserInteractionService implements UserInteractionService {
 
     public int selectNumber() {
         System.out.println("enter number to change:");
@@ -17,10 +17,10 @@ public class WorkWithConsole implements WorkWithConsoleInterface {
 
         if (userSelectCurrency.matches("^[a-zA-Z]+$")) {
             return userSelectCurrency;
-        } else throw new AlphabetExc("use latin words from the list");
+        } else throw new AlphabetException("use latin words from the list");
     }
 
-    public void stringOutConsole(String convertUserNumberToString, String currencyStringOut) {
+    public void outputToConsole(String convertUserNumberToString, String currencyStringOut) {
         System.out.println(convertUserNumberToString + " " + currencyStringOut);
     }
 }

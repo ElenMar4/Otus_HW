@@ -1,5 +1,5 @@
 package otus_java_basic.Marchenko.ProjectWork;
 
-public interface DataTransferInterface {
+public interface ApplicationLauncher {
     void startApplication();
 }
