@@ -3,11 +3,11 @@ package otus_java_basic.Marchenko.ProjectWork;
 import java.util.Map;
 import java.util.Stack;
 
-public class ConvertUserEnter implements ConvertUserEnterInterface {
+public class DigitalInputHandler implements InputDataHandler {
 
     private final Map<Integer, String[]> matrixNumericFirstExponent;
 
-    public ConvertUserEnter() {
+    public DigitalInputHandler() {
         matrixNumericFirstExponent = Map.ofEntries(Map.entry(0, new String[]{"", "десять ", "", ""}),
                 Map.entry(1, new String[]{"один ", "одиннадцать ", "", "сто "}),
                 Map.entry(2, new String[]{"два ", "двенадцать ", "двадцать ", "двести "}),
@@ -30,14 +30,14 @@ public class ConvertUserEnter implements ConvertUserEnterInterface {
         }
         String strFinal = "";
         switch (exponent.size()){
-            case 1 -> strFinal = numberToOneExponent(exponent.pop());
-            case 2 -> strFinal = numberToTwoExponent(exponent.pop());
-            case 3 -> strFinal = numberToThreeExponent(exponent.pop());
+            case 1 -> strFinal = getClassTheUnit(exponent.pop());
+            case 2 -> strFinal = getClassTheThousands(exponent.pop());
+            case 3 -> strFinal = getClassTheMillions(exponent.pop());
         }
         return strFinal;
     }
 
-    public String numberToOneExponent(int numberOneExponent){
+    public String getClassTheUnit(int numberOneExponent){
         StringBuilder stringOut = new StringBuilder();
         Stack<Integer> digit = new Stack<>();
         int temp = numberOneExponent;
@@ -62,11 +62,11 @@ public class ConvertUserEnter implements ConvertUserEnterInterface {
         return stringOut.toString();
     }
 
-    public String numberToTwoExponent(int temp){
-        return "Здесь будет код для чисел от 1000 до 999 999";
+    public String getClassTheThousands(int temp) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("method under development");
     }
 
-    public String numberToThreeExponent(int temp){
-        return "Здесь будет код для чисел от 1 000 000 до 999 999 999";
+    public String getClassTheMillions(int temp)throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("method under development");
     }
 }
