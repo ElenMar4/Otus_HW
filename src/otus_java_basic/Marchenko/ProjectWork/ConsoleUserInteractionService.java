@@ -11,6 +11,7 @@ public class ConsoleUserInteractionService implements UserInteractionService {
     }
 
     public String selectCurrency(String listCurrency) {
+
         System.out.println("select currency: " + listCurrency);
         Scanner sc = new Scanner(System.in);
         String userSelectCurrency = sc.nextLine();
@@ -21,6 +22,6 @@ public class ConsoleUserInteractionService implements UserInteractionService {
     }
 
     public void outputToConsole(String convertUserNumberToString, String currencyStringOut) {
-        System.out.println(convertUserNumberToString + " " + currencyStringOut);
+        System.out.print(convertUserNumberToString + currencyStringOut);
     }
 }
