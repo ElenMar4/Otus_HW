@@ -5,6 +5,9 @@ import otus_java_basic.Marchenko.ProjectWork.ConsoleUserInteractionService;
 import otus_java_basic.Marchenko.ProjectWork.CurrencyCompilerForRegionOne;
 import otus_java_basic.Marchenko.ProjectWork.DigitalInputHandler;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class TestFacadeApplication implements ApplicationLauncher {
 
     public static void main(String[] args) {
@@ -20,6 +23,7 @@ public class TestFacadeApplication implements ApplicationLauncher {
         String strCurrencyTest = "рублей";
 
 //         тестирование метода, который считывает с консоли ввод пользователя
+
         System.out.println("\nДля тестирования выберите цифру: " + valueTest);
         System.out.println("\nРезультат тестирования метода selectNumber: " + testSelectNumber(valueTest));
 
@@ -37,6 +41,8 @@ public class TestFacadeApplication implements ApplicationLauncher {
             //проверка, что тестовая строка(валюта прописью) и строка определенная с помощью метода идентичны
         System.out.println("\nРезультат тестирования метода getNumberAsString: " + testGetCurrencyBySourceData(valueTest, currencyTest, strCurrencyTest));
 
+            //проверка, что текст выводимы на экран и текст заданный идентичны
+        System.out.println("\nРезультат тестирования метода outputToConsole: " + testOutputToConsole(strTest, strCurrencyTest));
     }
 
     public boolean testSelectNumber(int temp) {
@@ -57,6 +63,31 @@ public class TestFacadeApplication implements ApplicationLauncher {
 
     public boolean testGetCurrencyBySourceData(int value, String currency, String currencyStr) {
         return currencyStr.equals(new CurrencyCompilerForRegionOne().getCurrencyBySourceData(value, currency));
+    }
+
+    public boolean testOutputToConsole(String value, String currency){
+
+        String outputStrTest = value + currency;
+        //запоминаем настоящий PrintStream в специальную переменную
+        PrintStream consoleStream = System.out;
+
+        //Создаем динамический массив
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        //создаем адаптер к классу PrintStream
+        PrintStream stream = new PrintStream(outputStream);
+        //Устанавливаем его как текущий System.out
+        System.setOut(stream);
+
+        //Вызываем функцию, которая ничего не знает о наших манипуляциях
+        new ConsoleUserInteractionService().outputToConsole(value, currency);
+
+        //Преобразовываем записанные в наш ByteArray данные в строку
+        String result = outputStream.toString();
+
+        //Возвращаем все как было
+        System.setOut(consoleStream);
+
+        return result.equals(outputStrTest);
     }
 }
 
