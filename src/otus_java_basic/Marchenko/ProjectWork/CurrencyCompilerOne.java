@@ -3,11 +3,11 @@ package otus_java_basic.Marchenko.ProjectWork;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CurrencyCompilerForRegionOne implements CompilerOfCurrency {
+public class CurrencyCompilerOne implements CompilerOfCurrency {
 
     private final Map<String, String[]> currency = new HashMap<>();
 
-    public CurrencyCompilerForRegionOne() {
+    public CurrencyCompilerOne() {
         currency.put("rub", new String[]{"рубль", "рубля", "рублей"});
         currency.put("usd", new String[]{"доллар", "доллара", "долларов"});
         currency.put("eur", new String[]{"евро", "евро", "евро"});
@@ -23,8 +23,8 @@ public class CurrencyCompilerForRegionOne implements CompilerOfCurrency {
 
     public String getCurrencyBySourceData(int intValue, String userSelectCurrency) {
         String[] currencyTemp = currency.get(userSelectCurrency);
-        int value = intValue/10;
-        if (value % 10 == 1){
+        int value = intValue / 10;
+        if (value % 10 == 1) {
             return currencyTemp[2];
         } else {
             return (switch (intValue % 10) {
