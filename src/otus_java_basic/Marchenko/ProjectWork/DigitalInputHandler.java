@@ -8,7 +8,7 @@ public class DigitalInputHandler implements InputDataHandler {
     private final Map<Integer, String[]> matrixNumericFirstExponent;
 
     public DigitalInputHandler() {
-        matrixNumericFirstExponent = Map.ofEntries(Map.entry(0, new String[]{"", "десять ", "", ""}),
+        matrixNumericFirstExponent = Map.ofEntries(Map.entry(0, new String[]{"ноль", "десять ", "", ""}),
                 Map.entry(1, new String[]{"один ", "одиннадцать ", "", "сто "}),
                 Map.entry(2, new String[]{"два ", "двенадцать ", "двадцать ", "двести "}),
                 Map.entry(3, new String[]{"три ", "тринадцать ", "тридцать ", "триста "}),
